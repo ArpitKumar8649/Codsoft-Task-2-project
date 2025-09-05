@@ -1,527 +1,1550 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Online Course Website</title>
-        <link rel="stylesheet" href="index.css" />
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-        />
-        <link rel="stylesheet" href="npm i bootstrap-icons" />
-    </head>
-    <body>
-        <header class="header">
-            <!-- Navbar start -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elva AI - Your Memory-Powered AI Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+       
+        :root {
+           
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+            --border-color: #e2e8f0;
+            --border-color-hover: #cbd5e1;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --hero-bg: linear-gradient(135deg, #f8fafc 0%, #dbeafe 50%, #f8fafc 100%);
+            --gradient-primary: linear-gradient(135deg, #3b82f6, #06b6d4);
+            --gradient-hover: linear-gradient(135deg, #2563eb, #0891b2);
+        }
+
+        [data-theme="dark"] {
+        
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --border-color: #334155;
+            --border-color-hover: #475569;
+            --card-bg: #1e293b;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            --gradient-primary: linear-gradient(135deg, #3b82f6, #06b6d4);
+            --gradient-hover: linear-gradient(135deg, #2563eb, #0891b2);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+     
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--border-color-hover);
+        }
+
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .card-header {
+            padding: 2rem 2rem 1rem 2rem;
+        }
+
+        .card-content {
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+     
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .header {
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .header-content {
+            display: flex;
+            height: 4rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-radius: 0.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .nav {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav {
+                display: flex;
+            }
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #3b82f6;
+        }
+
+        .header-actions {
+            display: none;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .header-actions {
+                display: flex;
+            }
+        }
+
+  
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0;
+            padding: 0;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-secondary);
+            border-color: var(--border-color-hover);
+            color: var(--text-primary);
+        }
+
+        .theme-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke: currentColor;
+        }
+
+        .mobile-theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+ 
+        .hero {
+            position: relative;
+            padding: 6rem 0 8rem 0;
+            background: var(--hero-bg);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24rem;
+            height: 24rem;
+            background: #dbeafe;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(3rem);
+        }
+
+        [data-theme="dark"] .hero::before {
+            background: #1e40af;
+            opacity: 0.2;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20rem;
+            height: 20rem;
+            background: #cffafe;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(3rem);
+        }
+
+        [data-theme="dark"] .hero::after {
+            background: #0891b2;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 3.75rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .hero-benefits {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .hero-benefits {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .benefit-icon {
+            color: #10b981;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+   
+        .features {
+            padding: 6rem 0;
+            background: var(--bg-tertiary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header .badge {
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        @media (min-width: 1024px) {
+            .features-grid {
+                gap: 4rem;
+            }
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .feature-item {
+                flex-direction: row;
+            }
+
+            .feature-item:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        }
+
+        .feature-content, .feature-image {
+            flex: 1;
+        }
+
+        .feature-card {
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 20rem;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-image img:hover {
+            transform: scale(1.05);
+        }
+
+ 
+        .about {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .about-card {
+            text-align: left;
+        }
+
+        .about-icon {
+            width: 2rem;
+            height: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+        }
+
              
-            <nav class="navbar navbar-expand-lg">
-                <div class="name">
-                    <a class="navbar-brand" href="#">eCourserahub</a>
-                </div>
-                <div class="container-fluid1">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="course.html">Course</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="registration-form.html">Register</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        .contact {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+        }
 
-            <!-- Navbar End -->
-        </header>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
 
-        <img
-          src="All Images/Background image.jpeg"
-          alt="Image of Online Education"
-          class="Background-image"
-        />
+        @media (min-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+            }
+        }
 
-        <main>
-            <!-- div container start -->
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
 
-            <div class="div-container">
-                <div class="div1">
-                    <div class="div1-inside">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <h4>Skilled Instructors</h4>
-                        <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                            Quibusdam, exercitationem.
-                        </p>
-                    </div>
-                </div>
-                <div class="div1">
-                    <div class="div1-inside">
-                        <i class="fa-solid fa-globe"></i>
-                        <h4>Online Classes</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et,
-                            possimus.
-                        </p>
-                    </div>
-                </div>
-                <div class="div1">
-                    <div class="div1-inside">
-                        <i class="fa-solid fa-house"></i>
-                        <h4>Home Projects</h4>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod,
-                            corporis!
-                        </p>
-                    </div>
-                </div>
-                <div class="div1">
-                    <div class="div1-inside">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <h4>Book Library</h4>
-                        <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
-                        voluptas?
-                        </p>
-                  </div>
-                </div>
-            </div>
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
 
-            <!-- div container end -->
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: var(--gradient-primary);
+            border-radius: 0.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
 
-            <!-- About us start-->
+        .contact-details h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
 
-            <div class="about-us">
-                <div class="aboutUsImg">
-                  <img src="All Images/homePage-AboutUs img.jpeg" alt="Book Image" />
-                </div>
+        .contact-details p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
 
-                <div class="aboutUsText">
-                    <h4>About Us</h4>
-                    <h2>Welcome to eCourserahub Platform</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                        temporibus tempora harum nulla. Numquam ipsam minima, quibusdam illo
-                        quia nesciunt.
-                        <br />
-                        <br />
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-                        perspiciatis numquam ab nihil mollitia, autem commodi modi aliquam
-                        quaerat ullam, dicta non fuga minima quasi molestiae id.
-                    </p>
-                    <div class="points">
-                        <ul>
-                            <li>
-                                <p>Skilled Instructors</p>
-                            </li>
-                            <li>
-                                <p>International Certification</p>
-                            </li>
-                            <li>
-                                <p>Online Classes</p>
-                            </li>
-                        </ul>
-                    </div>
-                  <button type="button" class="btn btn-lg readmore">Read More</button>
-                </div>
-            </div>
+        .contact-form {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+        }
 
-            <!-- About us end-->
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
 
-            <!-- Courses Category start-->
-            <div class="categories">
-                <h4>CATEGORIES</h4>
-                <h2>Course Categories</h2>
-                <div class="one-line">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/web design image" class="card-img-top" alt="Web Design Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Web Design</h5>
-                                    <a href="#">30+ Courses</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                              <img src="All Images/web development image.jpg" class="card-img-top" alt="Web Development Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Web Development</h5>
-                                    <a href="#">60+ Courses</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/graphic design image.jpeg" class="card-img-top" alt="Graphic Design Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Graphic Design</h5>
-                                    <a href="#">20+ Courses</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
 
-                <div class="second-line">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/digital marketing image.jpg" class="card-img-top" alt="Digital Marketing Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Digital Marketing</h5>
-                                    <a href="#">15+ Courses</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/video editing image.webp" class="card-img-top" alt="Video Editing Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Video Editing</h5>
-                                    <a href="#">20+ Courses</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/programming course image.jpg" class="card-img-top" alt="Programming Courses image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Programming Courses</h5>
-                                    <a href="#">50+ Courses</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Courses Category end-->
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-            <!-- Popular Course start-->
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: #bfdbfe;
+            margin-bottom: 2rem;
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .cta-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .btn-white {
+            background: white;
+            color: #3b82f6;
+        }
+
+        .btn-white:hover {
+            background: #f8fafc;
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+  
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0;
+        }
+
+        [data-theme="dark"] .footer {
+            background: #020617;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+        }
+
+        .footer-brand {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .logo-text {
+            color: var(--text-primary);
+        }
+
+        .footer-description {
+            color: var(--text-tertiary);
+            margin-bottom: 1.5rem;
+            max-width: 24rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 0.375rem;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--text-primary);
+            border-color: var(--border-color-hover);
+        }
+
+        .footer-section h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-tertiary);
+        }
+
+       
+        .icon {
+            width: 1rem;
+            height: 1rem;
+            fill: currentColor;
+        }
+
+     
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(2rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 4rem 0 6rem 0;
+            }
             
-            <div class="courses-detail">
-                <h4>COURSES</h4>
-                <h2>Popular Courses</h2>
-                <div class="popular-all-cards">
-                    <div class="card" style="width: 24rem;">
-                        <img src="All Images/web design image" class="card-img-top" alt="Web Design Image">
-                        <div class="card-body card-rating">
-                            <h3>$149.00</h3>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star fa-star-half-stroke"></span>
-                            <p>1.2M+ users</p>
-                            <h3>Web Design Course for Beginners</h3>
-                        </div>
-                        <div class="card-footer">
-                            <div class="user">
-                                <span class="fa-solid fa-user"></span>
-                                <p>Aryan Gupta</p>  
-                            </div>
-                            <div class="time">
-                               <span class="fa-solid fa-clock"></span>
-                                <p>9.5 Hrs</p> 
-                            </div>  
-                            <div class="user1">
-                                <span class="fa-solid fa-user"></span>
-                                <p>1.5k+ Students</p>
-                            </div>
-                        </div>
+            .features, .about, .cta {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🧠</div>
+                    <span class="logo-text">Elva AI</span>
+                </a>
+                
+                <nav class="nav">
+                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                    <a href="#" class="btn btn-secondary">Sign In</a>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu" id="mobileMenu">
+                <nav class="mobile-nav">
+                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <div class="mobile-actions">
+                    <button class="btn btn-secondary mobile-theme-toggle" onclick="toggleTheme()">
+                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                        <span class="theme-text">Light Mode</span>
+                    </button>
+                    <a href="#" class="btn btn-secondary">Sign In</a>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+ 
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">
+                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    Next-Generation AI Assistant
+                </div>
+                
+                <h1>
+                    Elva AI — Your 
+                    <span class="gradient-text">Memory-Powered</span> 
+                    AI Assistant
+                </h1>
+                
+                <p>
+                    Experience smarter conversations and effortless task automation. 
+                    Elva AI remembers, reasons, and acts on your behalf — making productivity seamless.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#" class="btn btn-primary btn-lg">
+                        Start Free Trial
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 0.5rem;">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12,5 19,12 12,19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-secondary btn-lg">Watch Demo</a>
+                </div>
+
+                <div class="hero-benefits">
+                    <div class="benefit-item">
+                        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                        </svg>
+                        <span>Save 3+ hours daily on routine tasks</span>
                     </div>
-                    <div class="card" style="width: 24rem;">
-                        <img src="All Images/web development image.jpg" class="card-img-top" alt="Web Development Image">
-                        <div class="card-body card-rating">
-                            <h3>$199.00</h3>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star fa-star-half-stroke"></span>
-                            <p>1.6M+ users</p>
-                            <h3>Web Development Course for Beginners</h3>
-                        </div>
-                        <div class="card-footer">
-                            <div class="user">
-                                <span class="fa-solid fa-user"></span>
-                                <p>Aryan Gupta</p>  
-                            </div>
-                            <div class="time">
-                               <span class="fa-solid fa-clock"></span>
-                                <p>10.5 Hrs</p> 
-                            </div>  
-                            <div class="user1">
-                                <span class="fa-solid fa-user"></span>
-                                <p>1.5k+ Students</p>
-                            </div>
-                        </div>
+                    <div class="benefit-item">
+                        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                        </svg>
+                        <span>Never lose context in conversations</span>
                     </div>
-                    <div class="card" style="width: 24rem;">
-                        <img src="All Images/digital marketing image.jpg" class="card-img-top" alt="Digital Marketing Image">
-                        <div class="card-body card-rating">
-                            <h3>$149.00</h3>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star fa-star-half-stroke"></span>
-                            <p>1.01M+ users</p>
-                            <h3>Digital Marketing Course for Beginners</h3>
-                        </div>
-                        <div class="card-footer">
-                            <div class="user">
-                                <span class="fa-solid fa-user"></span>
-                                <p>Aryan Gupta</p>  
-                            </div>
-                            <div class="time">
-                               <span class="fa-solid fa-clock"></span>
-                                <p>3.5 Hrs</p> 
-                            </div>  
-                            <div class="user1">
-                                <span class="fa-solid fa-user"></span>
-                                <p>1.5k+ Students</p>
-                            </div>
-                        </div>
+                    <div class="benefit-item">
+                        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                        </svg>
+                        <span>Complete transparency in AI decisions</span>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Popular Course end-->
+ 
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">Features</div>
+                <h2>Powerful AI Capabilities</h2>
+                <p>Discover how Elva AI transforms your daily workflow with intelligent automation and memory-powered conversations.</p>
+            </div>
 
-            <!-- Expert Instructors start-->
-
-            <div class="instructors">
-                <h4>INSTRUCTORS</h4>
-                <h2>Expert Instructors</h2>
-                <div class="one-line1">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/instructor1 image.jpeg" class="card-img-top" alt="Instructors Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Instructors Name</h5>
-                                    <p>Designation</p>
+            <div class="features-grid">
+                
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <div class="card feature-card">
+                            <div class="card-header">
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <div class="feature-icon-wrapper">
+                                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.07 2.07 0 0 1-2.44-2.44 2.5 2.5 0 0 1-1.13-4.1l.03-.08a2.5 2.5 0 0 1 .06-4.78A2.5 2.5 0 0 1 9.5 2z"></path>
+                                            <path d="M14.5 6.5a2.5 2.5 0 0 1 0 5 2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 1 0 5 2.5 2.5 0 0 1-2.5-2.5V8a2.5 2.5 0 0 1 2.5-2.5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="feature-title">Conversational Memory</h3>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                              <img src="All Images/instructor2 image.jpeg" class="card-img-top" alt="Instructors Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Instructors Name</h5>
-                                    <p>Designation</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/instructor3 image.jpeg" class="card-img-top" alt="Instructors Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Instructors Name</h5>
-                                    <p>Designation</p>
-                                </div>
+                                <p class="feature-description">
+                                    Remembers context and adapts to you across all conversations, building a deeper understanding over time.
+                                </p>
                             </div>
                         </div>
                     </div>
+                    <div class="feature-image">
+                        <img src="https://customer-assets.emergentagent.com/job_html-css-landing/artifacts/abxsjmjq_IMG-20250904-WA0004.jpg" alt="Conversational Memory">
+                    </div>
                 </div>
 
-                <div class="second-line1">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/instructor4 image.jpeg" class="card-img-top" alt="Instructors Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Instructors Name</h5>
-                                    <p>Designation</p>
+               
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <div class="card feature-card">
+                            <div class="card-header">
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <div class="feature-icon-wrapper">
+                                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="feature-title">Transparent Reasoning</h3>
                                 </div>
+                                <p class="feature-description">
+                                    Shows its thinking process in chat, so you can understand and trust every decision it makes.
+                                </p>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/instructor5 image.jpeg" class="card-img-top" alt="Instructors Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Instructors Name</h5>
-                                    <p>Designation</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://customer-assets.emergentagent.com/job_html-css-landing/artifacts/r1chkte8_IMG-20250904-WA0005.jpg" alt="Transparent Reasoning">
+                    </div>
+                </div>
+
+            
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <div class="card feature-card">
+                            <div class="card-header">
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <div class="feature-icon-wrapper">
+                                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                            <polyline points="22,6 12,13 2,6"></polyline>
+                                        </svg>
+                                    </div>
+                                    <h3 class="feature-title">Email Management</h3>
                                 </div>
+                                <p class="feature-description">
+                                    Send, fetch, and reply to emails seamlessly. Your AI assistant handles your inbox like a pro.
+                                </p>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="All Images/instructor6 image.jpeg" class="card-img-top" alt="Instructors image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Instructors Name</h5>
-                                    <p>Designation</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://customer-assets.emergentagent.com/job_html-css-landing/artifacts/cjf0jy2r_IMG-20250904-WA0006.jpg" alt="Email Management">
+                    </div>
+                </div>
+
+           
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <div class="card feature-card">
+                            <div class="card-header">
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <div class="feature-icon-wrapper">
+                                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                            <rect x="2" y="9" width="4" height="12"></rect>
+                                            <circle cx="4" cy="4" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <h3 class="feature-title">Task Automation</h3>
                                 </div>
+                                <p class="feature-description">
+                                    LinkedIn posting, profile scraping, and automated workflows that save you hours every day.
+                                </p>
                             </div>
                         </div>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://customer-assets.emergentagent.com/job_html-css-landing/artifacts/jq3rqm17_IMG-20250904-WA0007.jpg" alt="Task Automation">
+                    </div>
+                </div>
+
+               
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <div class="card feature-card">
+                            <div class="card-header">
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <div class="feature-icon-wrapper">
+                                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                    </div>
+                                    <h3 class="feature-title">Google Calendar Integration</h3>
+                                </div>
+                                <p class="feature-description">
+                                    Set and manage reminders, schedule meetings, and organize your time effortlessly.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://customer-assets.emergentagent.com/job_html-css-landing/artifacts/8me6vzs5_IMG-20250904-WA0003.jpg" alt="Google Calendar Integration">
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Expert Instructors end-->
 
-            <!-- Testimonial start-->
-
-            <div class="testimonial">
-                <h4>TESTIMONIAL</h4>
-                <h2>Our Students Say!</h2>
-                <div class="testimonal-all-cards">
-                    <div class="one-line2">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="All Images/student1 image.webp" class="img-fluid rounded-start" alt="Student Image">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Username</h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus pariatur perferendis nobis debitis quo fugiat neque sunt harum obcaecati temporibus, voluptatem.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="All Images/student2 image.jpg" class="img-fluid rounded-start" alt="Student Image">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Username</h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus pariatur perferendis nobis debitis quo fugiat neque sunt harum obcaecati temporibus, voluptatem.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">About Elva AI</div>
+                <h2>Built for Modern Professionals</h2>
+                <p>
+                    Elva AI is designed for professionals and businesses who demand more from their AI assistant. 
+                    Unlike traditional chatbots, Elva AI combines conversational intelligence with practical automation, 
+                    creating a truly productive partnership between human creativity and artificial intelligence.
+                </p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="card about-card">
+                    <div class="card-header">
+                        <svg class="about-icon" style="color: #eab308;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"></polygon>
+                        </svg>
+                        <h3 class="about-title">Intelligent Memory</h3>
                     </div>
-                    <div class="second-line2">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="All Images/student3 image.jpg" class="img-fluid rounded-start" alt="Student Image">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Username</h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus pariatur perferendis nobis debitis quo fugiat neque sunt harum obcaecati temporibus, voluptatem.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="All Images/student4 image.jpg" class="img-fluid rounded-start" alt="Student Image">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Username</h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus pariatur perferendis nobis debitis quo fugiat neque sunt harum obcaecati temporibus, voluptatem.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-content">
+                        <p class="about-text">
+                            Advanced memory systems that learn and adapt to your preferences, 
+                            work style, and communication patterns over time.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card about-card">
+                    <div class="card-header">
+                        <svg class="about-icon" style="color: #3b82f6;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                        <h3 class="about-title">Action-Oriented</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="about-text">
+                            Goes beyond conversation to take real actions — managing emails, 
+                            scheduling meetings, and automating repetitive tasks.
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Testimonial end-->
-        </main>
+   
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">Contact Us</div>
+                <h2>Get in Touch</h2>
+                <p>Ready to transform your productivity with Elva AI? We'd love to hear from you. Reach out to learn more about our AI assistant.</p>
+            </div>
 
-        <!-- Footer start-->
-
-        <footer class="footer">
-            <div class="footer-container-all">
-                <div class="footer-container">
-                    <div class="Quicklink">
-                        <h4>Quick Link</h4>
-                        <div class="quick-link-items">
-                            <div class="quick-one">
-                                <i class="fa-solid fa-greater-than"></i>
-                                <i class="fa-solid fa-greater-than"></i>
-                                <i class="fa-solid fa-greater-than"></i>
-                                <i class="fa-solid fa-greater-than"></i>
-                            </div>
-                            <div class="quick-two">
-                                <a href="about.html">About Us</a>
-                                <a href="contact.html">Contact Us</a>
-                                <a href="#">Terms & Conditions</a>
-                                <a href="#">FAQ & Help</a>
-                            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Us</h3>
+                            <p>Send us an email and we'll get back to you within 24 hours.</p>
+                            <p style="color: #3b82f6; font-weight: 500;">hello@elva-ai.com</p>
                         </div>
                     </div>
-                    <div class="contact">
-                        <h4>Contact Us</h4>
-                        <div class="contact-items">
-                            <div class="contact-one">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <i class="fa-solid fa-phone"></i>
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div class="contact-two">
-                                <p>1234 Street Name, City, Country</p>
-                                <p>+123 456 7890</p>
-                                <p>info@gmail.com</p>
-                            </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
                         </div>
-                        <div class="social-media">
-                            <a href="" class="fab fa-facebook-f"></a>
-                            <a href="" class="fab fa-youtube"></a>
-                            <a href="" class="fab fa-instagram"></a>
-                            <a href="" class="fab fa-linkedin-in"></a>
+                        <div class="contact-details">
+                            <h3>Call Us</h3>
+                            <p>Speak directly with our team for immediate assistance.</p>
+                            <p style="color: #3b82f6; font-weight: 500;">+1 (555) 123-4567</p>
                         </div>
                     </div>
-                    <div class="gallery">
-                        <h4>Gallery</h4>
-                        <div class="gallery-imgs">
-                            <div class="gallery-one">
-                                <img src="All Images/student2 image.jpg" alt="Student Image" />
-                                <img src="All Images/instructor6 image.jpeg" alt="instructor Image" />
-                                <img src="All Images/student1 image.webp" alt="Student Image" />
-                            </div>
-                            <div class="gallery-two">
-                                <img src="All Images/web development image.jpg" alt="Web Development Image" />
-                                <img src="All Images/graphic design image.jpeg" alt="Graphic Designation Image" />
-                                <img src="All Images/student3 image.jpg" alt="Student Image" />
-                            </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Visit Us</h3>
+                            <p>Come visit our headquarters for a face-to-face meeting.</p>
+                            <p style="color: #3b82f6; font-weight: 500;">123 AI Street<br>Tech Valley, CA 94043</p>
                         </div>
                     </div>
-                    <div class="newsletter">
-                        <h4>Newsletter</h4>
-                        <p>Lorem ipsum, dolor sit amet <br> consectetur adipisicing elit.</p>
-                        <div class="newsletter-form">
-                            <form action="#">
-                                <input type="text" placeholder="Enter Your Email">
-                                    <button type="submit">SignUp</button>
-                                </input>    
-                            </form>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12,6 12,12 16,14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Office Hours</h3>
+                            <p>Our team is available during these hours:</p>
+                            <p style="color: #3b82f6; font-weight: 500;">Mon-Fri: 9:00 AM - 6:00 PM PST<br>Sat: 10:00 AM - 4:00 PM PST</p>
                         </div>
                     </div>
                 </div>
-                <div class="footer-logo">
-                    <hr>
-                    <p>&copy; eCourserahub 2024. All Rights Reserved.</p>
-                    <p>Designed by <b>Aryan & Arpit</b></p>
+
+                <div class="contact-form">
+                    <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.5rem;">Send us a Message</h3>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="form-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="company">Company (Optional)</label>
+                            <input type="text" id="company" name="company" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Tell us about your needs and how Elva AI can help you..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                            Send Message
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 0.5rem;">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
 
-        <!-- Footer end-->
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://kit.fontawesome.com/5c35f7c8e0.js"
-        crossorigin="anonymous"></script>
-    </body>
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Productivity?</h2>
+            <p>Join thousands of professionals who have already upgraded their workflow with Elva AI.</p>
+            <div class="cta-actions">
+                <a href="#" class="btn btn-white btn-lg">
+                    Start Your Free Trial
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 0.5rem;">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12,5 19,12 12,19"></polyline>
+                    </svg>
+                </a>
+                <a href="#" class="btn btn-outline-white btn-lg">Schedule Demo</a>
+            </div>
+        </div>
+    </section>
+
+  
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <a href="#" class="logo">
+                            <div class="logo-icon">🧠</div>
+                            <span class="logo-text">Elva AI</span>
+                        </a>
+                    </div>
+                    <p class="footer-description">
+                        Your memory-powered AI assistant for smarter conversations and effortless task automation.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#api">API</a></li>
+                        <li><a href="#integrations">Integrations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Elva AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+   
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcons(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcons(newTheme);
+        }
+
+        function updateThemeIcons(theme) {
+            const sunIcons = document.querySelectorAll('.sun-icon');
+            const moonIcons = document.querySelectorAll('.moon-icon');
+            const themeTexts = document.querySelectorAll('.theme-text');
+            
+            if (theme === 'dark') {
+                sunIcons.forEach(icon => icon.style.display = 'none');
+                moonIcons.forEach(icon => icon.style.display = 'block');
+                themeTexts.forEach(text => text.textContent = 'Dark Mode');
+            } else {
+                sunIcons.forEach(icon => icon.style.display = 'block');
+                moonIcons.forEach(icon => icon.style.display = 'none');
+                themeTexts.forEach(text => text.textContent = 'Light Mode');
+            }
+        }
+
+       
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            
+          
+            const contactForm = document.querySelector('.contact-form form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                   
+                    const formData = new FormData(this);
+                    const data = Object.fromEntries(formData);
+                    
+                   
+                    if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                   
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = 'Sending...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+                        this.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                });
+            }
+        });
+
+   
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+             
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.remove('active');
+            });
+        });
+
+       
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+  
+        document.querySelectorAll('.feature-item').forEach(card => {
+            observer.observe(card);
+        });
+
+       
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+            
+            img.addEventListener('error', function() {
+                this.style.opacity = '0.5';
+                console.log('Failed to load image:', this.src);
+            });
+        });
+    </script>
+</body>
 </html>
